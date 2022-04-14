@@ -19,16 +19,7 @@ export default function App() {
   }
 
   function changeIsHeld(id) {
-    setDice((oldDice) => {
-      const newDice = oldDice.map((die) => {
-        if (die.id === id) {
-          return { ...die, isHeld: !die.isHeld };
-        } else {
-          return die;
-        }
-      });
-      return newDice;
-    });
+    return setDice((oldDice) => oldDice.map((die) => (die.id === id ? { ...die, isHeld: !die.isHeld } : die)));
   }
 
   const diceElements = dice.map((die) => (
