@@ -15,7 +15,11 @@ export default function App() {
   }
 
   function rollDice() {
-    setDice(diceGenerator());
+    setDice((oldDice) =>
+      oldDice.map((die) => {
+        return !die.isHeld ? { ...die, value: Math.ceil(Math.random() * 6) } : die;
+      })
+    );
   }
 
   function changeIsHeld(id) {
