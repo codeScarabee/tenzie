@@ -4,12 +4,14 @@ import "./App.css";
 import Die from "./Components/Die";
 
 export default function App() {
+  const diceValue = ["one", "two", "three", "four", "five", "six"];
   const [dice, setDice] = React.useState(diceGenerator());
 
   function diceGenerator() {
     const newDice = [];
     for (let i = 1; i <= 10; i++) {
-      newDice.push({ id: nanoid(), value: Math.ceil(Math.random() * 6), isHeld: false });
+      const randNum = Math.floor(Math.random() * 5);
+      newDice.push({ id: nanoid(), value: diceValue[randNum], isHeld: false });
     }
     return newDice;
   }
@@ -17,7 +19,8 @@ export default function App() {
   function rollDice() {
     setDice((oldDice) =>
       oldDice.map((die) => {
-        return !die.isHeld ? { ...die, value: Math.ceil(Math.random() * 6) } : die;
+        const randNum = Math.floor(Math.random() * 6);
+        return !die.isHeld ? { ...die, value: diceValue[randNum] } : die;
       })
     );
   }
